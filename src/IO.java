@@ -12,21 +12,26 @@ public class IO {
 	private static ImageIcon[][] reverseCardIcons=new ImageIcon[13][4];
 	private static ImageIcon[][] miniCardIcons=new ImageIcon[13][4];
 	private static ImageIcon blank;
-	private static final String FILE_PATH="/cards/";
-	private static final String MINI_PATH="/cards/mini/";
+	private static final String FILE_PATH = "cards/";
+	private static final String MINI_PATH = FILE_PATH + "mini/";
 	
 	private static BufferedImage loadImage(String fileName, boolean isMini){
-		BufferedImage i= null;
 		try {
-			String imageFileName=(isMini?MINI_PATH:FILE_PATH)+fileName+".png";
-			i=ImageIO.read(IO.class.getResourceAsStream(imageFileName));
+			String imageFileName=(isMini ? MINI_PATH : FILE_PATH) + fileName + ".png";
+			if(Sevens.IS_TEST){
+				return ImageIO.read(new File(imageFileName));
+			}
+			else{
+				return ImageIO.read(IO.class.getResourceAsStream("/" + imageFileName));
+			}
+			
 			//TODO change when debugging
 //			i=ImageIO.read(new File(imageFileName));
 		}catch(Exception e){
 			System.err.println("Couldn't read file.");
 			e.printStackTrace();
 		}
-		return i;
+		return null;
 	}
 	
 	public static BufferedImage getImage(String s){

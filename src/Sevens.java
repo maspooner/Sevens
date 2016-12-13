@@ -2,7 +2,8 @@
 
 
 public class Sevens {
-
+	protected static boolean IS_TEST = true;
+	
 	public static volatile boolean isStarting=false;
 	public static final String version="1.1";
 
